@@ -1,6 +1,6 @@
 # Truth
 
-Six places where nvii tells the user something that is not true. Each one is cheap to fix and expensive to leave, because a user who catches a lie stops trusting the whole product.
+Seven places where nvii tells the user something that is not true. Each one is cheap to fix and expensive to leave, because a user who catches a lie stops trusting the whole product.
 
 ### A. Projects, versions, sharing, and analytics · existing
 The web app for projects, version history, per member sharing, diffs, and analytics, all predating this workflow. code in `apps/web/app/(app)/projects/`
@@ -39,3 +39,8 @@ Every command catches a failed request, prints a friendly line, and exits 0. A s
 Removing a member calls a route that does not exist, so it always fails. The member count comes from the access table alone, so a project you own by yourself reads as zero members. The Admin badge is derived from ownership because no role is stored.
 **Done when:** removing a member actually removes them and the count drops, the count includes the owner, and the badge reflects something stored rather than something guessed.
 - [ ] Build it: `/feature-build remove member always fails, member count ignores the owner`
+
+### 28. A stub decryption function shadows the real one · from spec 0001
+`apps/web/lib/encryption.ts` exports a `decryptEnvValues` that only parses JSON, and it shadows the real AES implementation the same file re exports from `@nvii/env-helpers`. Every route that imports it through that path reports the encryption envelope as if it were the variables. That is why every project card reads "3 variables". Spec 0001 fixes the list path only.
+**Done when:** no route returns the `{iv, content, authTag}` envelope as decrypted content, every card shows the real variable count, and content written before encryption still reads correctly.
+- [ ] Build it: `/feature-build a stub decryption function shadows the real one`

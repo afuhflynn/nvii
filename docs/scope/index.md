@@ -17,7 +17,7 @@ _These are recommendations to keep your build orderly, not requirements. Skip an
 | 4 | CLI invents version names and change counts | Truth | planned |
 | 5 | CLI failures report success to scripts | Truth | planned |
 | 6 | Remove member always fails, member count ignores the owner | Truth | planned |
-| 7 | Paginated and searchable project list · needs a decision | At scale | planned |
+| 7 | Paginated and searchable project list | At scale | in-progress |
 | 8 | Search and pagination on the web projects page · needs a decision | At scale | planned |
 | 9 | Version list is silently cut at thirty | At scale | planned |
 | 10 | Terminal picker search and paging · needs a decision | At scale | planned |
@@ -36,11 +36,14 @@ _These are recommendations to keep your build orderly, not requirements. Skip an
 | 23 | Sync page reads real device state · needs a decision | Real pages | planned |
 | 24 | Dead code and dead controls sweep | Real pages | planned |
 | 25 | Marketing claims match the product | Real pages | planned |
+| 26 | Rate limit the project list routes · needs a decision | At scale | planned |
+| 27 | Index the project list for search · needs a decision | At scale | planned |
+| 28 | A stub decryption function shadows the real one · from spec 0001 | Truth | planned |
 
 ### Epic rollups
 
-- **Truth** ([truth.md](truth.md)) · 6 features, 5 planned, 1 in progress · six places where nvii shows a user something untrue. Build this phase first.
-- **At scale** ([listing.md](listing.md)) · 5 features, all planned · pagination, search, and shared indication on the web and in the terminal.
+- **Truth** ([truth.md](truth.md)) · 7 features, 6 planned, 1 in progress · seven places where nvii shows a user something untrue. Build this phase first.
+- **At scale** ([listing.md](listing.md)) · 7 features, 6 planned, 1 in progress · pagination, search, indexing, and shared indication on the web and in the terminal.
 - **Finish the commands** ([commands.md](commands.md)) · 10 features, all planned · commands that are empty, wired to routes that do not exist, or dangerous.
 - **Real pages** ([pages.md](pages.md)) · 4 features, all planned · settings and sync get real data, and the false promises come out of the code.
 
@@ -66,6 +69,10 @@ Out of scope for the current build pass, kept so the plan stays honest.
 - **Notifications**: the bell in the header does nothing and there is no notification model
 - **CLI pointing at a local backend**: the base address is hardcoded to production
 - **Removing the committed integrity secret**: the local config tamper check is not a security boundary today
+- **The dashboard counts go per page under spec 0001** while their copy still reads "across all projects" · from spec 0001 · feature 8 should fix the copy or the fetch
+- **The `slug` field on the Project type** has no column behind it, so nothing can search by it · from spec 0001
+- **Debouncing the search term** belongs to the web page and the terminal picker, not to the route · from spec 0001 · features 8 and 10
+- **This repo has no AGENTS.md**: the API conventions settled in spec 0001 have nowhere recorded · from spec 0001 · run `/codebase-audit`
 
 ## Legend
 
