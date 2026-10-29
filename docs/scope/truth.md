@@ -5,14 +5,14 @@ Seven places where nvii tells the user something that is not true. Each one is c
 ### A. Projects, versions, sharing, and analytics · existing
 The web app for projects, version history, per member sharing, diffs, and analytics, all predating this workflow. code in `apps/web/app/(app)/projects/`
 
-### 1. Login redirect lands on null · in-progress · GA
+### 1. Login redirect lands on null · done · GA
 Signing in with GitHub sends the user to a 404 page whose address contains the word null. The login button builds its return address by decoding a query parameter that was never there, and an absent value becomes the text null.
 **Done when:** signing in with GitHub, with or without a return path, lands on the app or on the page that was asked for, and a hand written return path cannot send the user off site.
 - [x] Build it: `/feature-build login redirect lands on null`
 - [x] Verify it: `/verify-release login redirect lands on null`
-- [ ] Test it: `/test-engineer login redirect lands on null`
-- [ ] Review it: `/peer-review login redirect lands on null`
-- [ ] Document it: `/tech-writer login redirect lands on null`
+- [x] Test it: `/test-engineer login redirect lands on null`
+- [x] Review it: `/peer-review login redirect lands on null`
+- [x] Document it: `/tech-writer login redirect lands on null`
 code in `apps/web/lib/redirect.ts`, `apps/web/components/auth/auth-button.tsx`, `apps/web/proxy.ts`
 
 ### 2. Version actions claim success without acting

@@ -8,6 +8,7 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
+    "test": "pnpm --pm-on-fail=ignore --filter @nvii/web test",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "publish-packages": "changeset version && changeset publish",
     "prepare": "husky"

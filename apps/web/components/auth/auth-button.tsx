@@ -14,25 +14,32 @@ export const AuthButton = () => {
   const [params] = useQueryStates(searchParamsSchema);
 
   const handleSignInWithGithub = async () => {
-    await authClient.signIn.social(
-      {
-        provider: "github",
-        callbackURL: buildCallbackURL(params.redirect, window.location.origin),
-      },
-      {
-        onRequest: () => setPendingGithub(true),
-        onSuccess: async () => {
-          toast.success("Signed in successfully");
-          window.location.reload();
+    try {
+      await authClient.signIn.social(
+        {
+          provider: "github",
+          callbackURL: buildCallbackURL(params.redirect, window.location.origin),
         },
-        onError: (ctx: any) => {
-          toast.error(ctx.error.message ?? "Unknown error.", {
-            description: "GitHub sign-in failed",
-          });
+        {
+          onRequest: () => setPendingGithub(true),
+          onSuccess: async () => {
+            toast.success("Signed in successfully");
+            window.location.reload();
+          },
+          onError: (ctx: any) => {
+            toast.error(ctx.error?.message ?? "Unknown error.", {
+              description: "GitHub sign-in failed",
+            });
+          },
         },
-      },
-    );
-    setPendingGithub(false);
+      );
+    } catch {
+      toast.error("An unexpected error occurred during sign in.", {
+        description: "GitHub sign-in failed",
+      });
+    } finally {
+      setPendingGithub(false);
+    }
   };
 
   return (
